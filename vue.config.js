@@ -1,6 +1,6 @@
 module.exports = {
   lintOnSave: undefined,
-  baseUrl: undefined,
+  baseUrl: '/spotify-top/',
   outputDir: 'docs',
   assetsDir: undefined,
   runtimeCompiler: undefined,
