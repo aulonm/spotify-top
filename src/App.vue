@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { login } from './util/api';
 
 export default {
   name: 'App',
@@ -34,6 +35,9 @@ export default {
     return {
       //
     };
+  },
+  created() {
+    login();
   },
 };
 </script>
