@@ -11,11 +11,11 @@ action "Install" {
 action "lint" {
   uses = "actions/npm@master"
   needs = ["Install"]
-  runs = "lint"
+  args = "run lint"
 }
 
 action "build" {
   uses = "actions/npm@master"
   needs = ["lint"]
-  runs = "build"
+  args = "run build"
 }
