@@ -15,6 +15,7 @@ export default {
       login();
     }
     this.$store.dispatch('GET_TOP_TRACKS');
+    this.$store.dispatch('GET_TOP_ARTISTS');
   },
 };
 </script>

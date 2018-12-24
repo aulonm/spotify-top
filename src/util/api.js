@@ -1,9 +1,10 @@
 import axios from 'axios';
+import config from './config';
 
 const login = (newToken = false) => {
   const clientId = '864189e74c304594a7116130f8627506';
   const authEndpoint = 'https://accounts.spotify.com/authorize';
-  const redirectUri = 'http://localhost:8081/spotify-top/#/';
+  const redirectUri = config.apiUrl;
   const scopes = ['user-top-read'];
 
   if (newToken === true) {
