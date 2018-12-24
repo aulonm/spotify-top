@@ -4,18 +4,18 @@ workflow "New workflow" {
 }
 
 action "Install" {
-  uses = "actions/npm@e7aaefe"
-  runs = "install"
+  uses = "actions/npm@master"
+  args = "install"
 }
 
 action "lint" {
-  uses = "actions/npm@e7aaefe"
+  uses = "actions/npm@master"
   needs = ["Install"]
-  runs = "lint"
+  args = "lint"
 }
 
 action "build" {
-  uses = "actions/npm@e7aaefe"
+  uses = "actions/npm@master"
   needs = ["lint"]
-  runs = "build"
+  args = "build"
 }
