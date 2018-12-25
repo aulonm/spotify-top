@@ -38,10 +38,12 @@ export default {
   },
   methods: {
     tracksLink() {
+      this.$store.dispatch('GET_TOP_TRACKS');
       return '/tracks';
     },
     artistsLink() {
-      return 'artists';
+      this.$store.dispatch('GET_TOP_ARTISTS');
+      return '/artists';
     },
   },
 };

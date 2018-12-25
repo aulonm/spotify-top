@@ -31,14 +31,13 @@
     </VFlex>
   </VLayout>
 </template>
+
 <script>
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState(['topTracks', 'topArtists']),
-  mounted() {
-    this.$store.dispatch('GET_TOP_TRACKS');
-  },
+  name: 'Tracks',
+  computed: mapState(['topTracks']),
   methods: {
     compileArtistTracks(track) {
       let information = `${track.artists[0].name}`;
@@ -46,7 +45,7 @@ export default {
       if (track.artists.length > 1) {
         track.artists.forEach((item, index) => {
           if (index === 0) return;
-          information = `${information} & ${item.name}`;
+          information = `${information}, ${item.name}`;
         });
       }
 

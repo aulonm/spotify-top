@@ -56,7 +56,14 @@ const getTopArtists = (limit = 20, offset = 0, timeRange = 'medium_term') => {
     headers: {
       Authorization: `Bearer ${localStorage.access_token}`,
     },
-  }).then(response => response.data).catch(error => Promise.reject(error.response.data.error));
+  })
+    .then(response => response.data)
+    .catch((error) => {
+      if (error.response.data.error.status === 401) {
+        login(true);
+      }
+      return Promise.reject(error.response.data.error);
+    });
 };
 
 export { login, getTopTracks, getTopArtists };
