@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Artists from './components/Artists.vue';
+import Tracks from './components/Tracks.vue';
 
 Vue.use(Router);
 
@@ -10,6 +12,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/tracks',
+      name: 'tracks',
+      component: Tracks,
+    },
+    {
+      path: '/artists',
+      name: 'artists',
+      component: Artists,
     },
     {
       path: '/about',

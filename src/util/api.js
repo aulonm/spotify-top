@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from './config';
+import router from '../router';
 
 const login = (newToken = false) => {
   const clientId = '864189e74c304594a7116130f8627506';
@@ -22,6 +23,8 @@ const login = (newToken = false) => {
 
   if (!localStorage.access_token) {
     window.location = `${authEndpoint}?client_id=${clientId}&scope=${scopes.join('%20')}&response_type=token&redirect_uri=${redirectUri}`;
+  } else {
+    router.push({ name: 'home' });
   }
 };
 

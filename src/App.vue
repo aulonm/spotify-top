@@ -2,24 +2,26 @@
   <VApp>
     <VToolbar app>
       <VToolbarTitle class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">
-          MATERIAL DESIGN
-        </span>
+        <span>SPOTIFY TOP INFORMATION</span>
       </VToolbarTitle>
       <VSpacer />
       <VBtn
         flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        :to="{ path: tracksLink() }"
       >
         <span class="mr-2">
-          Latest Release
+          Tracks
         </span>
-        <VIcon>open_in_new</VIcon>
+      </VBtn>
+      <VBtn
+        flat
+        :to="{ path: artistsLink() }"
+      >
+        <span class="mr-2">
+          Artists
+        </span>
       </VBtn>
     </VToolbar>
-
     <VContent>
       <RouterView />
     </VContent>
@@ -31,13 +33,16 @@ import { login } from './util/api';
 
 export default {
   name: 'App',
-  data() {
-    return {
-      //
-    };
-  },
-  created() {
+  mounted() {
     login();
+  },
+  methods: {
+    tracksLink() {
+      return '/tracks';
+    },
+    artistsLink() {
+      return 'artists';
+    },
   },
 };
 </script>

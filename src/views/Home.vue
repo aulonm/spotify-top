@@ -1,21 +1,13 @@
 <template>
-  <HelloWorld />
+  <VContainer
+    fluid
+  >
+    <h1>Add information here</h1>
+  </VContainer>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld.vue';
-import { login } from '../util/api';
-
 export default {
-  components: {
-    HelloWorld,
-  },
-  mounted() {
-    if (!localStorage.access_token) {
-      login();
-    }
-    this.$store.dispatch('GET_TOP_TRACKS');
-    this.$store.dispatch('GET_TOP_ARTISTS');
-  },
+  name: 'Home',
 };
 </script>
