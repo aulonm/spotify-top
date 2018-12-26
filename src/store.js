@@ -9,6 +9,7 @@ const debug = process.env.NODE_ENV !== 'production';
 export default new Vuex.Store({
   state: {
     topTracks: {},
+    topArtists: {},
     error: {},
   },
   debug,
@@ -27,19 +28,25 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    GET_TOP_TRACKS({ commit }) {
-      getTopTracks().then((response) => {
-        commit('SET_TOP_TRACKS', { tracks: response });
-      }).catch((error) => {
-        commit('GET_FAILED', { error });
-      });
+    GET_TOP_TRACKS({ commit }, { limit, offset, timeRange }) {
+      return getTopTracks(limit, offset, timeRange)
+        .then((response) => {
+          commit('SET_TOP_TRACKS', { tracks: response });
+          return Promise.resolve({ topTracks: this.state.topTracks });
+        })
+        .catch((error) => {
+          commit('GET_FAILED', { error });
+        });
     },
-    GET_TOP_ARTISTS({ commit }) {
-      getTopArtists().then((response) => {
-        commit('SET_TOP_ARTISTS', { artists: response });
-      }).catch((error) => {
-        commit('GET_FAILED', { error });
-      });
+    GET_TOP_ARTISTS({ commit }, { limit, offset, timeRange }) {
+      return getTopArtists(limit, offset, timeRange)
+        .then((response) => {
+          commit('SET_TOP_ARTISTS', { artists: response });
+          return Promise.resolve({ topArtists: this.state.topArtists });
+        })
+        .catch((error) => {
+          commit('GET_FAILED', { error });
+        });
     },
   },
 });

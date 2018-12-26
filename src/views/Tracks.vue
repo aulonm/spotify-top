@@ -11,13 +11,22 @@
         >
           <VToolbarTitle>Top tracks</VToolbarTitle>
         </VToolbar>
+        <FilterSettings
+          :click-function="getTrack"
+          :limit="limit"
+          :offset="offset"
+          :ranges="ranges"
+          :time-range="timeRange"
+        />
         <VList>
           <VListTile
-            v-for="item in topTracks.items"
+            v-for="(item, index) in dataTopTracks.items"
             :key="item.id"
             avatar
-            @click="getTrack(item)"
           >
+            <VListTileAction>
+              <span>{{ index + 1 }}</span>
+            </VListTileAction>
             <VListTileContent>
               <VListTileTitle v-text="compileArtistTracks(item)" />
             </VListTileContent>
@@ -33,11 +42,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import FilterSettings from '../components/FilterSettings.vue';
 
 export default {
   name: 'Tracks',
-  computed: mapState(['topTracks']),
+  components: { FilterSettings },
+  data() {
+    return {
+      limit: 20,
+      offset: 0,
+      timeRange: 'medium_term',
+      ranges: [
+        { value: 'short_term', name: '4 weeks' },
+        { value: 'medium_term', name: '6 months' },
+        { value: 'long_term', name: 'Years' },
+      ],
+      dataTopTracks: this.$store.state.topTracks,
+    };
+  },
   methods: {
     compileArtistTracks(track) {
       let information = `${track.artists[0].name}`;
@@ -51,13 +73,12 @@ export default {
 
       return `${information} - ${track.album.name}`;
     },
-    getTrack(item) {
-        console.log(item); // eslint-disable-line
+    getTrack(limit, offset, timeRange) {
+      this.$store.dispatch('GET_TOP_TRACKS', { limit, offset, timeRange })
+        .then((response) => {
+          this.dataTopTracks = response.topTracks;
+        });
     },
   },
 };
 </script>
-
-<style scoped>
-
-</style>

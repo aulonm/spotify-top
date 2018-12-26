@@ -38,7 +38,7 @@ const getTopTracks = (limit = 20, offset = 0, timeRange = 'medium_term') => {
       Authorization: `Bearer ${localStorage.access_token}`,
     },
   })
-    .then(response => response.data)
+    .then(response => Promise.resolve(response.data))
     .catch((error) => {
       if (error.response.data.error.status === 401) {
         login(true);
@@ -57,7 +57,7 @@ const getTopArtists = (limit = 20, offset = 0, timeRange = 'medium_term') => {
       Authorization: `Bearer ${localStorage.access_token}`,
     },
   })
-    .then(response => response.data)
+    .then(response => Promise.resolve(response.data))
     .catch((error) => {
       if (error.response.data.error.status === 401) {
         login(true);

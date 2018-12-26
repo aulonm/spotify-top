@@ -7,7 +7,7 @@
       <VSpacer />
       <VBtn
         flat
-        :to="{ path: tracksLink() }"
+        @click="tracksLink"
       >
         <span class="mr-2">
           Tracks
@@ -15,7 +15,7 @@
       </VBtn>
       <VBtn
         flat
-        :to="{ path: artistsLink() }"
+        @click="artistsLink"
       >
         <span class="mr-2">
           Artists
@@ -38,12 +38,16 @@ export default {
   },
   methods: {
     tracksLink() {
-      this.$store.dispatch('GET_TOP_TRACKS');
-      return '/tracks';
+      this.$store.dispatch('GET_TOP_TRACKS', { limit: 20, offset: 0, timeRange: 'medium_term' })
+        .then(() => {
+          this.$router.push({ path: '/tracks' });
+        });
     },
     artistsLink() {
-      this.$store.dispatch('GET_TOP_ARTISTS');
-      return '/artists';
+      this.$store.dispatch('GET_TOP_ARTISTS', { limit: 20, offset: 0, timeRange: 'medium_term' })
+        .then(() => {
+          this.$router.push({ path: '/artists' });
+        });
     },
   },
 };
