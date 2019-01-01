@@ -29,11 +29,12 @@
 </template>
 
 <script>
+import { login } from './util/api';
 
 export default {
   name: 'App',
   mounted() {
-    this.$store.dispatch('GET_TOP_TRACKS', { limit: 20, offset: 0, timeRange: 'medium_term' });
+    login();
   },
   methods: {
     tracksLink() {
